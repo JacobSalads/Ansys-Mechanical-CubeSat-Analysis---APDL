@@ -8,7 +8,7 @@ DELTIM,1,1,1,ON            ! Restricts the program from performing unwanted subs
 
 *DO,i,1,36,1               ! Initiating a Do [For] loop.
 
-  *SET,time,(i)*time_step  ! Time Step.
+  *SET,time,(i)            ! Time Step.
   TIME,time                ! Updates the time recorded in the loop.
  
   *SET,angle,w*time        ! The angle at the current time step (degrees). !  
