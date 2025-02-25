@@ -1,0 +1,86 @@
+*AFUN,DEG                  ! Sets the trigonometric function's expected unit input to degrees.
+*SET,w,0                   ! Set CubeSat Angular Velocity [Deg/s].
+*SET,Emissivity,0.91       ! The emissivity of Material if Using Radiation Flux (For this script, radiation flux was applied to surfaces outside of the script).
+*SET,Absorbance,0.15       ! The absorbance value here is supposed to mimic the solar absorbance of the faces receiving heat flux.
+*SET,SFLUX,1400*Absorbance ! Solar Flux [W/m^2]; Rounded up from 1361 W/m^2 --> 1400 W/m^2 for max temperature case analysis.
+
+DELTIM,1,1,1,ON            ! Restricts the program from performing unwanted substeps for this case, and allows results from previous steps to be carried on to the next step.
+
+*DO,i,1,36,1               ! Initiating a Do [For] loop.
+
+  *SET,time,(i)*time_step  ! Time Step.
+  TIME,time                ! Updates the time recorded in the loop.
+ 
+  *SET,angle,w*time        ! The angle at the current time step (degrees). !  
+  *SET,angle,MOD(angle,360)! Constrains the angle to be measured from 0-360 degrees.
+
+  ! If a rotation is applied, these various solar flux values represent the magnitude of flux affecting each surface (Only 4 surfaces are identified in this case since the prescribed rotation is only about the CubeSat's z-axis).
+  *SET,flux_1,SFLUX*cos(angle) 
+  *SET,flux_2,SFLUX*cos(90-angle) 
+  *SET,flux_3,SFLUX*cos(180-angle) 
+  *SET,flux_4,SFLUX*cos(270-angle) 
+ 
+  ! Debugging angles and heat fluxes 
+  *VWRITE, angle, time, flux_1, flux_2, flux_3, flux_4 
+  (F10.4, 5F10.4) 
+ 
+  ! Apply the flux to the selected surface(s) 
+  *IF, angle, GE, 0, AND, angle, LT, 90, THEN 
+      *VWRITE, 'Face1', angle 
+      (A20, F10.4) 
+      cmsel,s,Face1 
+      sf,all,hflux,flux_1 
+     
+      ALLSEL 
+     
+      cmsel,s,Face2 
+      sf,all,hflux,flux_2 
+     
+      ALLSEL 
+     
+     
+  *ELSEIF, angle, GE, 90, AND, angle, LT, 180, THEN 
+      *VWRITE, 'Face2', angle 
+      (A20, F10.4) 
+      cmsel,s,Face2 
+      sf,all,hflux,flux_2 
+     
+      ALLSEL 
+     
+      cmsel,s,Face3 
+      sf,all,hflux,flux_3 
+     
+      ALLSEL 
+ 
+  *ELSEIF, angle, GE, 180, AND, angle, LT, 270, THEN 
+      *VWRITE, 'Face3', angle 
+      (A20, F10.4) 
+      cmsel,s,Face3 
+      sf,all,hflux,flux_3 
+     
+      ALLSEL 
+     
+      cmsel,s,Face4 
+      sf,all,hflux,flux_4 
+     
+      ALLSEL 
+ 
+  *ELSEIF, angle, GE, 270, THEN 
+      *VWRITE, 'Face4', angle 
+      (A20, F10.4) 
+      cmsel,s,Face4 
+      sf,all,hflux,flux_4 
+     
+      ALLSEL 
+     
+      cmsel,s,Face1 
+      sf,all,hflux,flux_1 
+     
+      ALLSEL 
+     
+  *ENDIF 
+ 
+  SOLVE 
+  
+*ENDDO 
+SAVE 
