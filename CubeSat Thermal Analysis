@@ -2,6 +2,7 @@
 *SET,w,0                   ! Set CubeSat Angular Velocity [Deg/s].
 *SET,Emissivity,0.91       ! The emissivity of Material if Using Radiation Flux (For this script, radiation flux was applied to surfaces outside of the script).
 *SET,Absorbance,0.15       ! The absorbance value here is supposed to mimic the solar absorbance of the faces receiving heat flux.
+TUNIF, 10                  ! Setting the initial temperature of the CubeSat to 10C
 *SET,SFLUX,1400*Absorbance ! Solar Flux [W/m^2]; Rounded up from 1361 W/m^2 --> 1400 W/m^2 for max temperature case analysis.
 
 DELTIM,1,1,1,ON            ! Restricts the program from performing unwanted substeps for this case, and allows results from previous steps to be carried on to the next step.
