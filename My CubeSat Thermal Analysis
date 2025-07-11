@@ -1,0 +1,258 @@
+*AFUN,DEG ! Sets trigonometric function unit input to degrees.  
+*SET,w,1 ! Sets CubeSat Angular Velocity [Deg/s].
+
+*SET,Emissivity_Coating,0.88 ! The emissivity of Material if Using Radiation Flux (For this script, radiation flux was applied to surfaces inside Ansys Mechanical). 
+*SET,Absorbance_Coating,0.27 ! The absorbance value here is supposed to mimic the solar absorbance of the faces receiving solar heat flux.  
+TUNIF,0 ! Setting the initial temperature of the entire CubeSat to 0C 
+
+*SET,SFLUX,1400 ! Solar Flux [W/m^2]; Rounded up from 1361 W/m^2 --> 1400 W/m^2. 
+*SET,SFLUX_Coating,1400*Absorbance_Coating ! Solar flux is multiplied by the absorbance coefficient of the thermal coating to determine the heat flux experienced by coated surfaces.  
+*SET,IRFLUX,345 ! Infrared Radiation Flux Experienced by CubeSat (Wavelength that passes freely through applied thermal coating; In this case it is Earth Infrared Radiation). 
+
+DELTIM,1,1,1,ON ! Restricts the program from performing unwanted substeps for this case, and allows results from previous steps to be carried on to the next step. 
+
+*DO,i,1,360,1 ! Initiating a Do [For] loop. 
+
+    *SET,time,(i) ! Time Step. 
+    TIME,time ! Updates the time recorded in the loop.
+
+    *SET,angle,wtime ! The angle at the current time step (degrees).  
+    ! *SET,angle, ! Uncomment to set a constant angle value (No rotation).  
+    *SET,angleIR,180 ! Set the angle of the IR flux (Constant in this case for simplicity; Angle is based off face(s) orientation relative to the Nadir vector since Earth in this case is the infrared emitter).  
+    *SET,angle,MOD(angle,360)! Constrains the angle to be measured from 0-360 degrees. 
+
+    ! If a rotation is applied, these various solar flux values represent the magnitude of flux affecting each surface (Only 4 surfaces are identified in this case since the prescribed rotation is only about the CubeSat's z-axis).  
+
+    *SET,flux_1,SFLUX_Coating*cos(angle)  
+    *SET,flux_2,SFLUX_Coating*cos(90-angle) 
+    *SET,flux_3,SFLUX_Coating*cos(180-angle)  
+    *SET,flux_4,SFLUX_Coating*cos(270-angle) 
+
+    ! Same as fluxes set above, except the thermal coating's absorptance value is unnaccounted for. These values are used for solar panels that are not treated with the coating.  
+
+    *SET,flux_5,SFLUX*cos(angle)  
+    *SET,flux_6,SFLUX*cos(90-angle) 
+    *SET,flux_7,SFLUX*cos(180-angle)  
+    *SET,flux_8,SFLUX*cos(270-angle) 
+
+    ! Variation of IR Flux as the CubeSat Rotates  
+
+    *SET,flux_1_IR,IRFLUX*cos(angle)  
+    *SET,flux_2_IR,IRFLUX*cos(90-angle)  
+    *SET,flux_3_IR,IRFLUX*cos(180-angle)  
+    *SET,flux_4_IR,IRFLUX*cos(270-angle) 
+
+    ! Debugging angles and heat fluxes  
+
+    ! *VWRITE, angle, time, flux_1, flux_2, flux_3, flux_4 ! 
+    (F10.4, 5F10.4)  
+
+    ! Apply the flux to the selected surface(s) (angle dependent)
+
+    *IF, angle, GE, 0, AND, angle, LT, 90, THEN  
+
+        !! FRONT FACES !!
+
+        cmsel,s,SolarPanelFront 
+        sf,all,hflux,flux_5  
+        ALLSEL  
+        cmsel,s,ChassisFront  
+        sf,all,hflux,flux_1  
+        ALLSEL 
+        cmsel,s,HatFront  
+        sf,all,hflux,flux_5 
+        ALLSEL 
+ 
+        !! RIGHT SIDE FACES !!
+
+        cmsel,s,ChassisRight  
+        sf,all,hflux,flux_2 
+        ALLSEL 
+        cmsel,s,HatRight  
+        sf,all,hflux,flux_6 
+        ALLSEL 
+ 
+        !!! IR EFFECTS !!! 
+ 
+        !! BACK SIDE FACES
+
+        cmsel,s,SolarPanelBack 
+        sf,all,hflux,flux_1_IR 
+        ALLSEL  
+        cmsel,s,ChassisBack  
+        sf,all,hflux,flux_1_IR 
+        ALLSEL 
+        cmsel,s,HatBack  
+        sf,all,hflux,flux_1_IR 
+        ALLSEL 
+ 
+        !!LEFT SIDE FACES 
+ 
+        cmsel,s,ChassisLeft  
+        sf,all,hflux,flux_2_IR  
+        ALLSEL  
+        cmsel,s,HatLeft  
+        sf,all,hflux,flux_2_IR  
+        ALLSEL    
+  
+
+    *ELSEIF, angle, GE, 90, AND, angle, LT, 180, THEN  
+
+        !! RIGHT SIDE FACES  
+
+        cmsel,s,ChassisRight sf,all,hflux,flux_2  
+        ALLSEL  
+        cmsel,s,HatRight  
+        sf,all,hflux,flux_6  
+        ALLSEL 
+   
+        !! BACK SIDE FACES
+
+        cmsel,s,SolarPanelBack 
+        sf,all,hflux,flux_7  
+        ALLSEL  
+        cmsel,s,ChassisBack  
+        sf,all,hflux,flux_3  
+        ALLSEL 
+        cmsel,s,HatBack  
+        sf,all,hflux,flux_7 
+        ALLSEL 
+ 
+        !!! IR EFFECTS !!! 
+ 
+        !! LEFT SIDE FACES
+
+        cmsel,s,ChassisLeft  
+        sf,all,hflux,flux_2_IR  
+        ALLSEL  
+        cmsel,s,HatLeft  
+        sf,all,hflux,flux_2_IR  
+        ALLSEL 
+ 
+        !! FRONT SIDE FACES
+
+        cmsel,s,SolarPanelFront 
+        sf,all,hflux,flux_3_IR  
+        ALLSEL  
+        cmsel,s,ChassisFront  
+        sf,all,hflux,flux_3_IR 
+        ALLSEL 
+        cmsel,s,HatFront  
+        sf,all,hflux,flux_3_IR 
+        ALLSEL 
+  
+
+    *ELSEIF, angle, GE, 180, AND, angle, LT, 270, THEN  
+
+        !! BACK SIDE FACES  
+
+        cmsel,s,SolarPanelBack sf,all,hflux,flux_7  
+        ALLSEL  
+        cmsel,s,ChassisBack  
+        sf,all,hflux,flux_3  
+        ALLSEL 
+        cmsel,s,HatBack  
+        sf,all,hflux,flux_7 
+        ALLSEL 
+ 
+        !! LEFT SIDE FACES 
+        cmsel,s,ChassisLeft  
+        sf,all,hflux,flux_4  
+        ALLSEL  
+        cmsel,s,HatLeft  
+        sf,all,hflux,flux_8   
+        ALLSEL 
+ 
+        !!! IR EFFECTS !!! 
+ 
+        !! FRONT SIDE FACES
+
+        cmsel,s,SolarPanelFront 
+        sf,all,hflux,flux_3_IR  
+        ALLSEL  
+        cmsel,s,ChassisFront  
+        sf,all,hflux,flux_3_IR 
+        ALLSEL 
+        cmsel,s,HatFront  
+        sf,all,hflux,flux_3_IR 
+        ALLSEL 
+ 
+        !! RIGHT SIDE FACES
+
+        cmsel,s,ChassisRight  
+        sf,all,hflux,flux_4_IR  
+        ALLSEL 
+        cmsel,s,HatRight  
+        sf,all,hflux,flux_4_IR   
+        ALLSEL 
+  
+
+    *ELSEIF, angle, GE, 270, THEN  
+
+        !! LEFT SIDE FACE  
+
+        cmsel,s,ChassisLeft sf,all,hflux,flux_4  
+        ALLSEL  
+        cmsel,s,HatLeft  
+        sf,all,hflux,flux_8 
+        ALLSEL 
+ 
+        !! FRONT FACE 
+        
+        cmsel,s,SolarPanelFront 
+        sf,all,hflux,flux_5  
+        ALLSEL  
+        cmsel,s,ChassisFront  
+        sf,all,hflux,flux_1  
+        ALLSEL 
+        cmsel,s,HatFront  
+        sf,all,hflux,flux_5 
+        ALLSEL 
+ 
+        !!! IR EFFECTS !!! 
+ 
+        !! RIGHT SIDE FACES 
+
+        cmsel,s,ChassisRight  
+        sf,all,hflux,flux_4_IR  
+        ALLSEL  
+        cmsel,s,HatRight  
+        sf,all,hflux,flux_4_IR  
+        ALLSEL 
+ 
+        !! BACK SIDE FACES
+
+        cmsel,s,SolarPanelBack  
+        sf,all,hflux,flux_1_IR  
+        ALLSEL   
+        cmsel,s,ChassisBack  
+        sf,all,hflux,flux_1_IR  
+        ALLSEL 
+        cmsel,s,HatBack  
+        sf,all,hflux,flux_1_IR  
+        ALLSEL 
+
+    *ENDIF  
+
+    SOLVE 
+
+!!! RETRIEVING COMPONENT SCOPE DATA !!! ====> (((Create corresponding txt files to store data in))) 
+
+!! Camera Temp !!
+
+*GET, camera_temp, NODE, 12017, TEMP ! Retrieving temperature from a single node on my CubeSat's Camera
+*CFOPEN, C:\Users\(_____)\Documents\camera, txt, , APPEND ! Creating and appending node temperature data to txt file
+*VWRITE, time, camera_temp ! Writing node temp to txt file
+(2F10.4) ! Data Format
+*CFCLOS 
+
+!! ADCS Temp !!
+
+*GET, ADCS_temp, NODE, (#), TEMP ! 
+*CFOPEN, (Destination), txt, , APPEND ! 
+*VWRITE, time, ADCS_temp ! 
+(2F10.4) ! 
+*CFCLOS 
+
+*ENDDO 
+SAVE 
