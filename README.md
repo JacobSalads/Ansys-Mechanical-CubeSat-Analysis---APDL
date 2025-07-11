@@ -83,10 +83,39 @@ Internal heat generation of components is considered in these cases. The rate of
 - Internal Heat Generation Representative of Comms Downlink
 
 
-![Case1](https://github.com/user-attachments/assets/1fe95850-e0e0-448f-968b-f6a1d77a12dc)
+  ![Case1](https://github.com/user-attachments/assets/4380c6a4-9b48-473f-a5f0-777853e9aa21)
 
 
+**Case 2:** Thermal Environment of CubeSat at Perigee (1000km) when Illuminated (20 min. Simulation).
+- Time=1200s, w=0 deg/s
+- Earth IR Applied (@ 1,000km)
+- Earth Albedo Present
+- Internal Heat Generation Representative of Comms Downlink
 
- 
+  ![Case2](https://github.com/user-attachments/assets/a1ab22df-5e97-4334-94b1-811ca0dbef00)
 
 
+**Case 3:** Thermal Environment of the Uphill/Downhill Coast (60 min. Simulation).
+- Time=3600s, w=0.5 deg/s
+- Earth IR Applied (@ 15,000km)
+- Earth Albedo Applied (@ 15,000 km)
+- Internal Heat Generation Representative of Uphill Coast
+
+  ![Case3](https://github.com/user-attachments/assets/9f581cf8-f93e-4e0b-b536-392cd162bc97)
+
+
+**Case 4:** Thermal Environment of Apogee (Sensing Window) when CubeSat is Eclipsed (60 min. Simulation).
+- Earth IR Applied (@ 36,000km)
+- No Earth Albedo Applied
+- No Solar Flux Applied
+- Internal Heat Generation Representative of Sensing Window
+
+  ![Case4](https://github.com/user-attachments/assets/e560affd-2511-4e7f-a9f9-b1d0ae248bb7)
+
+
+**Case 5:** Thermal Environment of Apogee (Sensing Window) when CubeSat is Illuminated (60 min. Simulation).
+- Earth IR Applied (@ 36,000km)
+- Earth Albedo Applied (@ 36,000km)
+- Internal Heat Generation Representative of Sensing Window
+
+  ![Case5](https://github.com/user-attachments/assets/bbc4b83c-320c-48c0-8315-55241465ad9d)
