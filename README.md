@@ -63,7 +63,7 @@ Each of the cases above began with the solar flux being applied to the x+ face. 
 
 The following results were generated from the 'My CubeSat Thermal Analysis' script, which includes Earth infrared radiation and albedo as a heat flux source. Additionally, the CubeSat model employed in these results has 2 deployable solar panels and a radiation "hat" to help protect the COTS camera module.
 
-   ![CubeSat](https://github.com/user-attachments/assets/7a8458a9-ffb1-42c3-8b21-b767d734f92a)
+   ![CubeSat](https://github.com/user-attachments/assets/7a8458a9-ffb1-42c3-8b21-b767d734f92a =250x250)
 
 Coating materials selected for thermal regulation:
 - Socomore Aeroglaze® Z306 (Internal)
