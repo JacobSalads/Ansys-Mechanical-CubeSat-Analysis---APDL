@@ -71,9 +71,11 @@ Coating materials selected for thermal regulation:
 
 The orbit design of this case is also considered, which is visible below.
 
-  <img width="1258" height="710" alt="image" src="https://github.com/user-attachments/assets/0eeda3af-b05d-4d2d-869a-fb1064367bc0" />
+  <img width="1000" height="564" alt="image" src="https://github.com/user-attachments/assets/0eeda3af-b05d-4d2d-869a-fb1064367bc0" />
 
 Internal heat generation of components is considered in these cases. The rate of geat generation is dependent on the orbit regime analyzed, as different regimes in the CubeSat's orbit call for more/less power consumption. 
+
+
 
 **Case 1:** Thermal Environment of Perigee (1000km) when the CubeSat is Eclipsed (20 min. Simulation). 
 - Time=1200s, w=0 deg/s
@@ -86,6 +88,8 @@ Internal heat generation of components is considered in these cases. The rate of
   ![Case1](https://github.com/user-attachments/assets/4380c6a4-9b48-473f-a5f0-777853e9aa21)
 
 
+
+
 **Case 2:** Thermal Environment of CubeSat at Perigee (1000km) when Illuminated (20 min. Simulation).
 - Time=1200s, w=0 deg/s
 - Earth IR Applied (@ 1,000km)
@@ -93,6 +97,8 @@ Internal heat generation of components is considered in these cases. The rate of
 - Internal Heat Generation Representative of Comms Downlink
 
   ![Case2](https://github.com/user-attachments/assets/a1ab22df-5e97-4334-94b1-811ca0dbef00)
+
+
 
 
 **Case 3:** Thermal Environment of the Uphill/Downhill Coast (60 min. Simulation).
@@ -104,6 +110,8 @@ Internal heat generation of components is considered in these cases. The rate of
   ![Case3](https://github.com/user-attachments/assets/9f581cf8-f93e-4e0b-b536-392cd162bc97)
 
 
+
+
 **Case 4:** Thermal Environment of Apogee (Sensing Window) when CubeSat is Eclipsed (60 min. Simulation).
 - Earth IR Applied (@ 36,000km)
 - No Earth Albedo Applied
@@ -111,6 +119,8 @@ Internal heat generation of components is considered in these cases. The rate of
 - Internal Heat Generation Representative of Sensing Window
 
   ![Case4](https://github.com/user-attachments/assets/e560affd-2511-4e7f-a9f9-b1d0ae248bb7)
+
+
 
 
 **Case 5:** Thermal Environment of Apogee (Sensing Window) when CubeSat is Illuminated (60 min. Simulation).
