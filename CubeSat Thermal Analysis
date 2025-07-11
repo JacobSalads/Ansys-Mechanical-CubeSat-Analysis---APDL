@@ -12,7 +12,7 @@ DELTIM,1,1,1,ON            ! Restricts the program from performing unwanted subs
   *SET,time,(i)            ! Time Step.
   TIME,time                ! Updates the time recorded in the loop.
  
-  *SET,angle,w*time        ! The angle at the current time step (degrees). !  
+  *SET,angle,w*time        ! The angle at the current time step (degrees).  
   *SET,angle,MOD(angle,360)! Constrains the angle to be measured from 0-360 degrees.
 
   ! If a rotation is applied, these various solar flux values represent the magnitude of flux affecting each surface (Only 4 surfaces are identified in this case since the prescribed rotation is only about the CubeSat's z-axis).
