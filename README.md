@@ -2,11 +2,11 @@
 This repository will hopefully help those interested in modeling the thermal environment onboard a cube satellite.
 
 
-# Thermal Analysis Details
+## Thermal Analysis Details
 
 This APDL script models the thermal environment of a CubeSat, either in a fixed orientation relative to the Sun or rotating about a single axis. Setting a value to the angular velocity variable, w, will prescribe a rotation in deg/s about the user defined axis of rotation. The axis of rotation is defined through the selection of faces to be subjected to flux through the IF/ELSEIF rotation conditions.
 
-## How to: Setup and Run Simulation
+### How to: Setup and Run Simulation
 
 - Outside APDL script:
   1. Import a geometry file into Ansys Mechanical.
@@ -29,7 +29,7 @@ This APDL script models the thermal environment of a CubeSat, either in a fixed 
   2. Monitor results through clicking the 'Solution Information' folder found in the 'Solution' folder.
   3. Insert a 'Temperature Plot Tracker' into the 'Solution Information' folder and right click the tracker to select the 'Switch to Automatic Mode' for the temperature contour plots on your model to be visible through         each iteration.
 
-## Example Cases
+### Example Cases
 
 The initial tests shown below were to demonstrate the performance of various thermal coatings to be applied to the outer faces of the CubeSat. All coatings and their absorbtivity(α)/emissivity(ε) were defined within this NASA site: https://www.nasa.gov/smallsat-institute/sst-soa/thermal-control/#7.2.1
 
