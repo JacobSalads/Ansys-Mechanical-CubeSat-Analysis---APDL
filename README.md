@@ -29,7 +29,7 @@ This APDL script models the thermal environment of a CubeSat, either in a fixed 
   2. Monitor results through clicking the 'Solution Information' folder found in the 'Solution' folder.
   3. Insert a 'Temperature Plot Tracker' into the 'Solution Information' folder and right click the tracker to select the 'Switch to Automatic Mode' for the temperature contour plots on your model to be visible through         each iteration.
 
-### Example Cases
+### Example Cases (Generic Script)
 
 The initial tests shown below were to demonstrate the performance of various thermal coatings to be applied to the outer faces of the CubeSat. All coatings and their absorbtivity(α)/emissivity(ε) were defined within this NASA site: https://www.nasa.gov/smallsat-institute/sst-soa/thermal-control/#7.2.1
 
@@ -57,4 +57,36 @@ Each of the cases above began with the solar flux being applied to the x+ face. 
 - "Face2" (y+ Face)
 - "Face3" (x- Face)
 - "Face4" (y- Face)
+
+
+### Example Cases (Personal Script)
+
+The following results were generated from the 'My CubeSat Thermal Analysis' script, which includes Earth infrared radiation and albedo as a heat flux source. Additionally, the CubeSat model employed in these results has 2 deployable solar panels and a radiation "hat" to help protect the COTS camera module.
+
+   ![CubeSat](https://github.com/user-attachments/assets/7a8458a9-ffb1-42c3-8b21-b767d734f92a)
+
+Coating materials selected for thermal regulation:
+- Socomore Aeroglaze® Z306 (Internal)
+- White Silicone PCBE (External; α =0.27,ε=0.88) 
+
+The orbit design of this case is also considered, which is visible below.
+
+  <img width="1258" height="710" alt="image" src="https://github.com/user-attachments/assets/0eeda3af-b05d-4d2d-869a-fb1064367bc0" />
+
+Internal heat generation of components is considered in these cases. The rate of geat generation is dependent on the orbit regime analyzed, as different regimes in the CubeSat's orbit call for more/less power consumption. 
+
+**Case 1:** Thermal Environment of Perigee (1000km) when the CubeSat is Eclipsed (20 min. Simulation). 
+- Time=1200s, w=0 deg/s
+- Earth IR Applied (@ 1,000km)​
+- No Earth Albedo ​
+- No Solar Flux (CubeSat is shadowed) ​
+- Internal Heat Generation Representative of Comms Downlink
+
+
+![Case1](https://github.com/user-attachments/assets/1fe95850-e0e0-448f-968b-f6a1d77a12dc)
+
+
+
+ 
+
 
