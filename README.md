@@ -61,7 +61,7 @@ Each of the cases above began with the solar flux being applied to the x+ face. 
 
 ### Example Cases (Personal Script)
 
-The following results were generated from the 'My CubeSat Thermal Analysis' script, which includes Earth infrared radiation and albedo as a heat flux source. Additionally, the CubeSat model employed in these results has 2 deployable solar panels and a radiation "hat" to help protect the COTS camera module. For the purpose of viewing component temperatures, the external walls of the CubeSat will be hidden during thermal analysis review. 
+The following results were generated from the 'My CubeSat Thermal Analysis' script, which includes Earth infrared radiation and albedo as a heat flux source. Additionally, the CubeSat model employed in these results has 2 deployable solar panels and a radiation "hat" to help protect the COTS camera module. For the purpose of viewing component temperatures, the external walls of the CubeSat were hidden during the thermal analysis. 
 
    <img width="599" height="535" alt="image" src="https://github.com/user-attachments/assets/48e250dc-51f8-4041-98fa-8ba133cb9926" />
 
