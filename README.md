@@ -53,10 +53,10 @@ The case below follows these parameters:
 
 
 Each of the cases above began with the solar flux being applied to the x+ face. The simulated clockwise roll of the CubeSat seen above is done by creating named selections of the CubeSats faces:
-- "Face1" (x+ Face)
-- "Face2" (y+ Face)
-- "Face3" (x- Face)
-- "Face4" (y- Face)
+- "Face1" (+x Face)
+- "Face2" (+y Face)
+- "Face3" (-x Face)
+- "Face4" (-y Face)
 
 
 ### Example Cases (Personal Script)
