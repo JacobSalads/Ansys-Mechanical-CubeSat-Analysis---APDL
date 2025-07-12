@@ -1,4 +1,4 @@
-# Ansys-Mechanical-CubeSat-Analysis---APDL
+# Ansys Mechanical CubeSat Thermal Analysis (APDL Script)
 This repository will hopefully help those interested in modeling the thermal environment onboard a cube satellite.
 
 
